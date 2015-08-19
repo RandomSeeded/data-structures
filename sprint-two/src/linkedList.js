@@ -20,7 +20,6 @@ var LinkedList = function(){
   };
 
   list.removeHead = function(){
-    debugger;
     var node = list.head;
     list.head = node.next;
     return node.value;
