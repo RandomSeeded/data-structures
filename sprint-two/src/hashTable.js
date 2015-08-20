@@ -7,7 +7,6 @@ HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
   var bucket = this._storage.get(i) || [];
   var replacement = false;
-  debugger;
   for (var idx = 0; idx < bucket.length; idx++) {
     if (bucket[idx].key === k) { 
       bucket[idx].value = v;
@@ -27,8 +26,14 @@ HashTable.prototype.retrieve = function(k){
   return null;
 };
 
-HashTable.prototype.remove = function(k){
-  //debugger;
+HashTable.prototype.remove = function(k) {
+  var i = getIndexBelowMaxForKey(k, this._limit);
+  var bucket = this._storage.get(i);
+  var replaceIdx = bucket.reduce(function(idx, elem, index) {
+    if (elem.key === k) { return index; }
+    return idx;
+  }, -1);
+  return bucket.splice(replaceIdx, 1).value;
 };
 
 
