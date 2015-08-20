@@ -29,7 +29,14 @@ BinarySearchTree.prototype.contains = function(value) {
   }
 };
 
-BinarySearchTree.prototype.depthFirstLog = function() {
+BinarySearchTree.prototype.depthFirstLog = function(func) {
+  func(this.value);
+  if (this.left !== null) { 
+    this.left.depthFirstLog(func);
+  }
+  if (this.right !== null) {
+    this.right.depthFirstLog(func);
+  }
 };
 
 
