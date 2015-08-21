@@ -1,0 +1,11 @@
+<html>
+<script src="bloom_filter.js"></script>
+<script>
+  var myBloom = new BloomFilter(18, 3);
+  myBloom.add('kitties');
+  myBloom.add('puppies');
+  myBloom.add('flowers');
+  myBloom.add('skulls');
+  console.log(myBloom.lookup('kitties'));
+</script>
+</html>
