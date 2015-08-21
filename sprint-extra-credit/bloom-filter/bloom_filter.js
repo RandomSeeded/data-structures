@@ -37,6 +37,5 @@ function hashFn(item, max, seed) {
 
   var position = Math.floor(random()*max);
   return position;
-  //return position % max;
 }
 

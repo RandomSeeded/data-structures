@@ -1,3 +1,4 @@
+// TODO: convert the tuple object to a tuple array. Not hard, maybe not best use of my time
 var HashTable = function(){
   this._limit = 8;
   this._storage = LimitedArray(this._limit);

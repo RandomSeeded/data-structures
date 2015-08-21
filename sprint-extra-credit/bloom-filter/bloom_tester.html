@@ -1,14 +1,27 @@
 <html>
-<script src="bloom_filter.js"></script>
-<script>
-  var myBloom = new BloomFilter(18, 3);
-  myBloom.add('kitties');
-  myBloom.add('puppies');
-  myBloom.add('flowers');
-  myBloom.add('skulls');
-  console.log(myBloom.lookup('kitties'));
-  console.log(myBloom.lookup('bones'));
-  console.log(myBloom.lookup('dogs'));
-  console.log(myBloom.lookup('cats')); // FALSE POSITIVE
-</script>
+  <head>
+    <meta charset="utf-8">
+    <title>BLOOM TESTING</title>
+    <script src="../../lib/jquery/jquery.js"></script>
+    <script src="../../lib/mocha/mocha.js"></script>
+    <script src="../../lib/chai/chai.js"></script>
+    <script src="../../lib/underscore/underscore.js"></script>
+    <script src="bloom_filter.js"></script>
+    <script>
+      mocha.setup('bdd');
+      window.expect = chai.expect;
+      $(function() {
+        window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run();
+      })
+    </script>
+
+    <!-- source files -->
+    <script src="./bloom_filter.js"></script>
+
+    <!-- spec files -->
+    <script src="./bloom_specs.js"></script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+  </body>
 </html>
