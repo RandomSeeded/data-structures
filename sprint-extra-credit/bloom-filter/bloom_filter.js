@@ -1,18 +1,20 @@
-function BloomFilter(m, k) {
+function BloomFilter(m, k, seed) {
   this.m = m;
   this.k = k;
   this.vector = [];
+  this.baseSeed = seed;
 }
 
 BloomFilter.prototype.add = function(item) {
-  for (var seed = 1; seed <= this.k; seed++) {
+  for (var seed = this.baseSeed; seed < this.baseSeed+this.k; seed++) {
     this.vector[hashFn(item, this.m, seed)] = 1;
   }
 }
 
 BloomFilter.prototype.lookup = function(item) {
-  for (var seed = 1; seed <= this.k; seed++) {
-    if (this.vector[hashFn(item, this.m, seed)] !== 1) { return false; }
+  for (var seed = this.baseSeed; seed < this.baseSeed+this.k; seed++) {
+    var pos = hashFn(item, this.m, seed);
+    if (this.vector[pos] !== 1) { return false; }
   }
   return true;
 }
@@ -37,5 +39,6 @@ function hashFn(item, max, seed) {
 
   var position = Math.floor(random()*max);
   return position;
+  //return position % max;
 }
 
