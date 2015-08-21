@@ -66,5 +66,4 @@ describe('bloom_filter', function() {
     var actualFalsePct = (foundPct - actualPct) * (lookups.length / notAdded.length);
     expect(Math.abs(expectedFalsePct-actualFalsePct)).to.be.below(.05);
   });
-
 });
