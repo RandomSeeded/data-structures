@@ -21,6 +21,7 @@ Graph.prototype.contains = function(node){
 // ------------------------
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node){
+  // NOTE: you didnt remove the node from other nodes' edges
   var returnNode = this.storage[node];
   delete this.storage[node];
 };
@@ -34,6 +35,7 @@ Graph.prototype.hasEdge = function(fromNode, toNode){
 // ------------------------
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode){
+  // could put in a node-doesnt-exist check here
   this.storage[fromNode].edges[toNode] = toNode;
   this.storage[toNode].edges[fromNode] = fromNode;
 };
@@ -41,6 +43,7 @@ Graph.prototype.addEdge = function(fromNode, toNode){
 // ------------------------
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode){
+  // again, an existence check
   delete this.storage[fromNode].edges[toNode];
   delete this.storage[toNode].edges[fromNode];
 };
