@@ -14,7 +14,7 @@ BinarySearchTree.prototype.insert = function(value) {
   else if (value > this.value && this.right !== null) { this.right.insert(value); }
   // Base case: cannot go any further down the tree
   else {
-    var newTree = new BinarySearchTree(value);
+    var newTree = BinarySearchTree(value);
     if (value < this.value) { this.left = newTree; }
     else { this.right = newTree; }
   }
@@ -24,13 +24,11 @@ BinarySearchTree.prototype.contains = function(value) {
   if (value === this.value) { return true; }
   else if (value < this.value && this.left !== null) { return this.left.contains(value); }
   else if (value > this.value && this.right !== null) { return this.right.contains(value); }
-  else {
-    return false;
-  }
+  else { return false; }
 };
 
 BinarySearchTree.prototype.find = function(value) {
-  if (value === this.value) { return this.value; }
+  if (value === this.value) { return this; }
   else if (value < this.value && this.left !== null) { return this.left.find(value); }
   else if (value > this.value && this.right !== null) { return this.right.find(value); }
   else { return false; }
