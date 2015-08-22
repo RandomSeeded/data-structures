@@ -29,6 +29,13 @@ BinarySearchTree.prototype.contains = function(value) {
   }
 };
 
+BinarySearchTree.prototype.find = function(value) {
+  if (value === this.value) { return this.value; }
+  else if (value < this.value && this.left !== null) { return this.left.find(value); }
+  else if (value > this.value && this.right !== null) { return this.right.find(value); }
+  else { return false; }
+};
+
 BinarySearchTree.prototype.depthFirstLog = function(func) {
   func(this.value);
   if (this.left !== null) { 
