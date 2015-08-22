@@ -34,16 +34,13 @@ describe('test_suite', function() {
     expect(tree.contains(25)).to.equal(false);
   });
 
-  /*it('should correctly add balanced leaves', function() {
+  it('should correctly repaint nodes', function() {
     tree.insert(12);
     tree.insert(24);
     tree.insert(9);
     tree.insert(15);
     tree.insert(21);
     tree.insert(27);
-    expect(tree.contains(12)).to.equal(true);
-    expect(tree.contains(21)).to.equal(true);
-    expect(tree.contains(28)).to.equal(false);
-  });*/
-
+    tree.insert(6);
+  });
 });
