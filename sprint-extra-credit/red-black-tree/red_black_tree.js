@@ -36,15 +36,81 @@ RedBlackTree.prototype.insert = function(value) {
     }
 
     else {
-      newTree.getRelationships(newTree); // assigns father, grandfather, uncle
+      newTree.getRelationships(); // assigns father, grandfather, uncle
+      // For purposes of not retyping
+      var father = newTree.father;
+      var grandfather = newTree.grandfather;
+      var uncle = newTree.uncle;
 
       // Insertion Case 3: both the PARENT and UNCLE are RED
-      if (newTree.father && newTree.father.color === 1 && newTree.uncle && newTree.uncle.color === 1) {
-        debugger;
+      if (father && father.color === 1 && uncle && uncle.color === 1) {
         newTree.repaintAncestors();
+      }
+
+      // Insertion Cases 4 & 5: the PARENT is red but the UNCLE is black
+      if (father.color === 1 && (uncle === null || uncle.color === 1)) {
+        debugger;
+        // Case 4 rotations (left and right)
+        if (newTree === father.right && father === grandfather.left) {
+          father.rotateLeft();
+          case5(father);
+        }
+        else if (newTree === father.left && father === grandfather.right) {
+          father.rotateRight();
+          case5(father);
+        }
+        else {
+          case5(newTree);
+        }
+
+        // Case 5 rotations (left and right)
       }
     }
   }
+};
+
+function case5(node) {
+  node.getRelationships();
+  var father = node.father;
+  var grandfather = node.grandfather;
+  var uncle = node.uncle;
+  debugger;
+  if (father.color === 1 && (uncle === null || uncle.color === 1)) {
+    if (node === father.left && father === grandfather.left) {
+      grandfather.rotateRight();
+    }
+    else if (node === father.right && father === grandfather.right) {
+      grandfather.rotateLeft();
+    }
+  }
+};
+
+RedBlackTree.prototype.rotateLeft = function() {
+  var root = this;
+  var pivot = this.right;
+  var beta = pivot.left;
+  var grandfather = root.father;
+
+  pivot.left = root;
+  pivot.father = grandfather;
+  root.father = pivot;
+  root.right = beta;
+  if (grandfather.right === root) { grandfather.right = pivot; }
+  else { grandfather.left = pivot; }
+};
+
+RedBlackTree.prototype.rotateRight = function() {
+  var root = this;
+  var pivot = this.left;
+  var beta = pivot.right;
+  var grandfather = root.father;
+
+  pivot.right = root;
+  pivot.father = grandfather;
+  root.father = pivot;
+  root.left = beta;
+  if (grandfather.right === root) { grandfather.right = pivot; }
+  else { grandfather.left = pivot; }
 };
 
 RedBlackTree.prototype.getRelationships = function() {

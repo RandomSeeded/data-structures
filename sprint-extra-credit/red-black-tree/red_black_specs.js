@@ -41,6 +41,13 @@ describe('test_suite', function() {
     tree.insert(15);
     tree.insert(21);
     tree.insert(27);
-    tree.insert(6);
+    expect(tree.find(12).color).to.equal(0);
+    expect(tree.find(27).color).to.equal(1);
+  });
+
+  it('should handle basic case 4 rotations', function() {
+    tree.insert(85);
+    tree.insert(25);
+    expect(tree.find(18).right.value).to.equal(25);
   });
 });
