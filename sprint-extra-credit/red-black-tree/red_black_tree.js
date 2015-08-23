@@ -51,11 +51,11 @@ RedBlackTree.prototype.insert = function(value) {
       if (father.color === 1 && (uncle === null || uncle.color === 1)) {
         // Case 4 rotations (left and right)
         if (newTree === father.right && father === grandfather.left) {
-          father.rotateLeft();
+          father.rotate('left');
           case5(father);
         }
         else if (newTree === father.left && father === grandfather.right) {
-          father.rotateRight();
+          father.rotate('right');
           case5(father);
         }
         else {
@@ -74,47 +74,31 @@ function case5(node) {
   var uncle = node.uncle;
   if (father.color === 1 && (uncle === null || uncle.color === 1)) {
     if (node === father.left && father === grandfather.left) {
-      grandfather.rotateRight();
+      grandfather.rotate('right');
     }
     else if (node === father.right && father === grandfather.right) {
-      grandfather.rotateLeft();
+      grandfather.rotate('left');
     }
   }
 };
 
-RedBlackTree.prototype.rotateLeft = function() {
+RedBlackTree.prototype.rotate = function(direction) {
+  var otherDirection = (direction === 'left') ? 'right' : 'left';
   var root = this;
-  var pivot = this.right;
-  var beta = pivot.left;
+  var pivot = this[otherDirection];
+  var beta = pivot[direction];
   var grandfather = root.father;
 
-  pivot.left = root;
+  pivot[direction] = root;
   pivot.father = grandfather;
   root.father = pivot;
-  root.right = beta;
+  root[otherDirection] = beta;
   if (grandfather !== null) {
-    if (grandfather.right === root) { grandfather.right = pivot; }
-    else { grandfather.left = pivot; }
+    if (grandfather[otherDirection] === root) { grandfather[otherDirection] = pivot; }
+    else { grandfather[direction] = pivot; }
   }
   else { _root = pivot; }
-};
-
-RedBlackTree.prototype.rotateRight = function() {
-  var root = this;
-  var pivot = this.left;
-  var beta = pivot.right;
-  var grandfather = root.father;
-
-  pivot.right = root;
-  pivot.father = grandfather;
-  root.father = pivot;
-  root.left = beta;
-  if (grandfather !== null) {
-    if (grandfather.right === root) { grandfather.right = pivot; }
-    else { grandfather.left = pivot; }
-  }
-  else { _root = pivot; }
-};
+}
 
 RedBlackTree.prototype.getRelationships = function() {
   var father = this.father;
