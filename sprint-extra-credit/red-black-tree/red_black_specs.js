@@ -45,9 +45,18 @@ describe('test_suite', function() {
     expect(tree.find(27).color).to.equal(1);
   });
 
-  it('should handle basic case 4 rotations', function() {
-    tree.insert(85);
-    tree.insert(25);
-    expect(tree.find(18).right.value).to.equal(25);
+  it('should have full insertion capability', function() {
+    tree = tree.insert(5);
+    tree = tree.insert(10);
+    tree = tree.insert(27);
+    tree = tree.insert(36);
+    tree = tree.insert(50);
+    tree = tree.insert(3);
+    tree = tree.insert(1);
+    expect(tree.value).to.equal(10);
+    expect(tree.left.value).to.equal(3);
+    expect(tree.left.left.value).to.equal(1);
+    expect(tree.right.left.value).to.equal(18);
   });
+
 });
